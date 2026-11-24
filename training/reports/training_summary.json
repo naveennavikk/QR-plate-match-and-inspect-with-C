@@ -1,0 +1,18 @@
+{
+  "epochs": 40,
+  "image_size": 224,
+  "models": {
+    "yolo26n_cls": {
+      "weights": "models\\yolo26n_cls_best.pt",
+      "seconds": 1645.6,
+      "test_top1": 0.6462882161140442,
+      "test_top5": 0.8908296823501587
+    },
+    "yolo11n_cls": {
+      "weights": "models\\yolo11n_cls_best.pt",
+      "seconds": 2730.2,
+      "test_top1": 0.6375545859336853,
+      "test_top5": 0.9017467498779297
+    }
+  }
+}

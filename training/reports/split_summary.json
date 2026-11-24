@@ -1,0 +1,104 @@
+{
+  "seed": 42,
+  "classes": {
+    "Accept+": {
+      "val": 238,
+      "test": 239,
+      "train": 1120
+    },
+    "GAP BETWEEN PLATE AND WALL": {
+      "val": 8,
+      "test": 8,
+      "train": 43
+    },
+    "HOUSE ID NO. MISSMATCH": {
+      "val": 2,
+      "test": 2,
+      "train": 10
+    },
+    "Horizontal Pictures": {
+      "val": 2,
+      "test": 2,
+      "train": 6
+    },
+    "Nails Not Proper": {
+      "val": 40,
+      "test": 40,
+      "train": 193
+    },
+    "PLATE MISSING AFTER INSTALLATION": {
+      "val": 4,
+      "test": 4,
+      "train": 16
+    },
+    "PLATE NOT VISIBLE IN PROPERTY IMAGE": {
+      "val": 6,
+      "test": 7,
+      "train": 21
+    },
+    "Property Image not proper": {
+      "val": 5,
+      "test": 5,
+      "train": 28
+    },
+    "REMOVE DUSTBIN STICKER": {
+      "val": 2,
+      "test": 0,
+      "train": 2
+    },
+    "REMOVE PLATE WHEN WALL IS CRACK": {
+      "val": 2,
+      "test": 2,
+      "train": 6
+    },
+    "REMOVE PLATES": {
+      "val": 16,
+      "test": 16,
+      "train": 76
+    },
+    "Rescan Scanify Image": {
+      "val": 75,
+      "test": 74,
+      "train": 341
+    },
+    "SHOW HOUSE ENTRANCE": {
+      "val": 1,
+      "test": 0,
+      "train": 2
+    },
+    "Shops": {
+      "val": 32,
+      "test": 32,
+      "train": 146
+    },
+    "Show Property Image Long Distance": {
+      "val": 4,
+      "test": 4,
+      "train": 16
+    },
+    "Stick plate properly": {
+      "val": 10,
+      "test": 9,
+      "train": 45
+    },
+    "WRITE HOUSE ID NO. ON PLATE WITH MARKER": {
+      "val": 4,
+      "test": 4,
+      "train": 20
+    },
+    "Write O for owner and R1, R2 for Rent": {
+      "val": 2,
+      "test": 2,
+      "train": 12
+    },
+    "plate is damaged After Installation": {
+      "val": 6,
+      "test": 8,
+      "train": 37
+    }
+  },
+  "cross_class_duplicates_dropped": 4,
+  "accept_pairs_available": 3695,
+  "accept_pairs_trained": 600,
+  "accept_pairs_holdout": 300
+}

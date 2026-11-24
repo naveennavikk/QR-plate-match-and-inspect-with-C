@@ -1,0 +1,151 @@
+{
+  "models": "new",
+  "test": {
+    "Accept+": {
+      "n": 239,
+      "manual": 19,
+      "accept": 202,
+      "reject": 18,
+      "exact_class": 207
+    },
+    "GAP BETWEEN PLATE AND WALL": {
+      "n": 8,
+      "reject": 6,
+      "accept": 2,
+      "exact_class": 1
+    },
+    "Horizontal Pictures": {
+      "n": 2,
+      "manual": 1,
+      "reject": 1,
+      "exact_class": 0
+    },
+    "HOUSE ID NO. MISSMATCH": {
+      "n": 2,
+      "reject": 1,
+      "accept": 1,
+      "exact_class": 0
+    },
+    "Nails Not Proper": {
+      "n": 40,
+      "reject": 25,
+      "accept": 11,
+      "manual": 4,
+      "exact_class": 18
+    },
+    "plate is damaged After Installation": {
+      "n": 8,
+      "manual": 2,
+      "reject": 4,
+      "accept": 2,
+      "exact_class": 0
+    },
+    "PLATE MISSING AFTER INSTALLATION": {
+      "n": 4,
+      "reject": 2,
+      "manual": 1,
+      "accept": 1,
+      "exact_class": 0
+    },
+    "PLATE NOT VISIBLE IN PROPERTY IMAGE": {
+      "n": 7,
+      "reject": 6,
+      "accept": 1,
+      "exact_class": 1
+    },
+    "Property Image not proper": {
+      "n": 5,
+      "accept": 2,
+      "reject": 3,
+      "exact_class": 0
+    },
+    "REMOVE PLATE WHEN WALL IS CRACK": {
+      "n": 2,
+      "reject": 2,
+      "exact_class": 0
+    },
+    "REMOVE PLATES": {
+      "n": 16,
+      "reject": 11,
+      "accept": 5,
+      "exact_class": 2
+    },
+    "Rescan Scanify Image": {
+      "n": 74,
+      "reject": 54,
+      "accept": 18,
+      "manual": 2,
+      "exact_class": 48
+    },
+    "Shops": {
+      "n": 32,
+      "manual": 26,
+      "accept": 5,
+      "reject": 1,
+      "exact_class": 26
+    },
+    "Show Property Image Long Distance": {
+      "n": 4,
+      "accept": 2,
+      "reject": 1,
+      "manual": 1,
+      "exact_class": 0
+    },
+    "Stick plate properly": {
+      "n": 9,
+      "reject": 5,
+      "manual": 2,
+      "accept": 2,
+      "exact_class": 2
+    },
+    "WRITE HOUSE ID NO. ON PLATE WITH MARKER": {
+      "n": 4,
+      "reject": 2,
+      "accept": 2,
+      "exact_class": 0
+    },
+    "Write O for owner and R1, R2 for Rent": {
+      "n": 2,
+      "reject": 1,
+      "accept": 1,
+      "exact_class": 0
+    }
+  },
+  "holdout_accept": {
+    "plate": {
+      "n": 300,
+      "accept": 252,
+      "manual": 28,
+      "reject": 20,
+      "non_accept_reasons": {
+        "accept+": 17,
+        "shops": 11,
+        "nails not proper": 10,
+        "rescan scanify image": 5,
+        "remove plates": 4,
+        "gap between plate and wall": 1
+      }
+    },
+    "house": {
+      "n": 300,
+      "accept": 244,
+      "manual": 24,
+      "reject": 32,
+      "non_accept_reasons": {
+        "rescan scanify image": 24,
+        "accept+": 14,
+        "shops": 10,
+        "nails not proper": 6,
+        "plate not visible in property image": 1,
+        "write house id no. on plate with marker": 1
+      }
+    }
+  },
+  "summary": {
+    "test_accept_approved_pct": 84.5,
+    "test_reject_caught_pct": 74.9,
+    "test_reject_wrongly_approved": 55,
+    "test_reject_exact_rule_pct": 44.7,
+    "holdout_plate_approved_pct": 84.0
+  }
+}
