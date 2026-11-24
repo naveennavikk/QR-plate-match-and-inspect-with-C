@@ -36,7 +36,8 @@ function showResults(items){
   results.replaceChildren();
   for(const item of items){
     const card=document.createElement("article");
-    let kind="manual",title="REQUIRED MANUAL REVIEW",detail="No status change was made.";
+    let kind="manual",title=`PAIR ${Number(item.index)+1} — REQUIRED MANUAL REVIEW`;
+    let detail=`Reason: ${item.manual_review_reason||"The result was not clear enough for an automatic decision."} No status change was made.`;
     if(item.success===false){kind="failed";title=`PAIR ${Number(item.index)+1} — INPUT/PROCESSING ERROR`;detail=item.error||"Could not process this pair.";}
     else if(item.QRStatus===1){kind="approved";title=`PAIR ${Number(item.index)+1} — APPROVE`;detail="The plate matched and inspector accepted the reference image.";}
     else if(item.QRStatus===0){kind="rejected";title=`PAIR ${Number(item.index)+1} — REJECT`;detail=item.Remark||"The pair did not pass inspection.";}

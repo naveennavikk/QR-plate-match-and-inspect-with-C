@@ -130,13 +130,15 @@ def decode_image(value: str, field_name: str) -> Image.Image:
         raise HTTPException(400, f"{field_name} is not a supported image.") from None
 
 
-def result(images: ImagePair, qr_status=None, remark=None, manual_review=False):
+def result(images: ImagePair, qr_status=None, remark=None, manual_review=False, reason=None):
     """Return only the fields the existing frontend needs to update its record."""
     response = {
         "QRStatus": qr_status,
         "Remark": remark,
         "manual_review": manual_review,
     }
+    if manual_review:
+        response["manual_review_reason"] = reason or "The result was not clear enough for an automatic decision."
     if images.userId is not None:
         response["userId"] = images.userId
     if images.houseId is not None:
@@ -166,17 +168,33 @@ def inspect_reference(reference: Image.Image, images: ImagePair):
     winners = [max(scores, key=scores.get).strip().casefold() for _, scores in predictions]
     nail_manual = highest.strip().casefold() == "accept+" and any(w == "nails not proper" for w in winners)
     normalized = " ".join(highest.strip().split()).casefold()
-    is_manual = (
-        nail_manual
-        or normalized == "stick plate properly"
-        or any(word in normalized for word in ("shop", "store", "merchant", "metal"))
-    )
-    if is_manual:
-        return result(images, qr_status=None, remark=images.Remark, manual_review=True)
+    label, confidence = highest.strip(), averages[highest]
+
+    def manual(reason):
+        return result(images, qr_status=None, remark=images.Remark, manual_review=True, reason=reason)
+
+    if nail_manual:
+        return manual(
+            "The plate matched, but the inspector models disagree: the overall prediction is Accept+, "
+            "while one model flagged 'nails not proper'. Please check how the plate is fixed."
+        )
+    if normalized == "stick plate properly":
+        return manual(
+            f"The plate matched, but the inspector flagged 'stick plate properly' ({confidence:.0%} confidence). "
+            "Please check that the plate is fixed properly on the wall."
+        )
+    if any(word in normalized for word in ("shop", "store", "merchant", "metal")):
+        return manual(
+            f"The plate matched, but the inspector classified it as '{label}' ({confidence:.0%} confidence), "
+            "which always needs a person to check."
+        )
     if normalized == "accept+":
         # Auto-approve only confident predictions; uncertain ones go to a person.
-        if averages[highest] < ACCEPT_THRESHOLD:
-            return result(images, qr_status=None, remark=images.Remark, manual_review=True)
+        if confidence < ACCEPT_THRESHOLD:
+            return manual(
+                f"The plate matched and the inspector leaned towards Accept+, but its confidence "
+                f"({confidence:.0%}) is below the {ACCEPT_THRESHOLD:.0%} needed for automatic approval."
+            )
         return result(images, qr_status=1, remark="")
     remark = CLASS_TO_REMARK.get(normalized, f"Inspector rejection: {highest.strip()}.")
     return result(images, qr_status=0, remark=remark)
@@ -228,7 +246,13 @@ def process_pair(images: ImagePair):
         raise HTTPException(500, f"Image matching failed: {exc}") from exc
 
     if match.get("needs_manual_review"):
-        return result(images, qr_status=None, remark=images.Remark, manual_review=True)
+        return result(
+            images,
+            qr_status=None,
+            remark=images.Remark,
+            manual_review=True,
+            reason=match.get("manual_review_reason"),
+        )
     if not match.get("contains_reference"):
         return result(
             images,
